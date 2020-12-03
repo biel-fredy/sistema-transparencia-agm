@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Rendimentos</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+	<br>
+	<label>Pesquisa de Rendimentos</label>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Rendimentos</h1>
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+					Rendimentos
+					<tr>
+						<th>Funcionario</th>
+						<th>Nome</th>
+						<th>Valor</th>
+						<th>Mes</th>
+						<th>Ano</th>
+						<th>Tipo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="rendimento : ${rendimentos}">
+						<td th:text="${rendimento.funcionario}"></td>
+						<td th:text="${rendimento.nome}"></td>
+						<td th:text="${rendimento.valor}"></td>
+						<td th:text="${rendimento.mes}"></td>
+						<td th:text="${rendimento.ano}"></td>
+						<td th:text="${rendimento.tipo}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

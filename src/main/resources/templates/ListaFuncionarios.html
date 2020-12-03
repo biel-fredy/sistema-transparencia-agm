@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Lista de Funcionarios</title>
+	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	  $( function() {
+	    $( "#slider-range" ).slider({
+	      range: true,
+	      step: 500,
+	      min: 0,
+	      max: 50000,
+	      values: [ 1000, 5000 ],
+	      slide: function( event, ui ) {
+	        $( "#amount" ).val( "R$" + ui.values[ 0 ] + " - R$" + ui.values[ 1 ] );
+	      }
+	    });
+	    $( "#amount" ).val( "R$" + $( "#slider-range" ).slider( "values", 0 ) +
+	      " - R$" + $( "#slider-range" ).slider( "values", 1 ) );
+	  } );
+	</script>
+	<style>
+	  #slider-range {
+	    height: 10px;
+	    width: 300px;
+	    margin: 5px;
+	  }
+  </style>
+</head>
+<body>
+	<br>
+	<label>Pesquisa de Funcionários</label>
+	<form id="pesquisa" action="pesquisarfuncionario" method="post">
+		<label>Nome:</label>
+		<input name="nomepesquisa"></input>
+		<br>
+		<label>Cargo:</label>
+		<input name="cargopesquisa" type="text"></input>
+		<br>
+		<label for="amount">Salário:</label>
+  		<input name="amount" type="text" id="amount" readonly style="border:0;"></input>
+  		<div id="slider-range"></div> 
+  		<br>
+		<input type="submit" value="Buscar"></input>
+	</form> 
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista de funcionarios</h1>
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+					Sistema de transparência Mogi das Cruzes
+					<tr>
+						<th>Selecionar</th>
+						<th>Nome</th>
+						<th>Cargo</th>
+						<th>Salário</th>
+					</tr>
+				</thead>
+				<tbody>
+					<form action="compararfuncionario" method="post"
+					th:object="${comparar}">
+						<tr th:each="funcionario : ${funcionarios}">
+							<td>
+							<input type="checkbox" 
+							th:value="${funcionario.id}">
+  							</td>
+							<td th:text="${funcionario.nome}"></td>
+							<td th:text="${funcionario.cargo}"></td>
+							<td th:text="${funcionario.salario}"></td>
+						</tr>
+						<input type="submit" value="selecionar">
+					</form>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
